@@ -4,17 +4,24 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "HumanCharacter.generated.h"
+#include "Components/SphereComponent.h"
+#include "NPCharacter.generated.h"
 
 UCLASS()
-class LEARNCPPUE4_API AHumanCharacter : public ACharacter
+class LEARNCPPUE4_API ANPCharacter : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this character's properties
-	AHumanCharacter();
-	float mouseSensitive;
+	ANPCharacter();
+	//Set box component for overlap
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Collision)
+	USphereComponent* CollisionSphere;
+	//NPC message
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, CAtegory = NPCMessage)
+	FString NpcMessage;
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -26,9 +33,5 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	void MoveForward(float delta);
-	void MoveRight(float delta);
-	void Yaw(float delta);
-	void Pitch(float delta);
 
 };
