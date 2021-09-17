@@ -17,7 +17,7 @@ public:
 	ANPCharacter();
 	//Set box component for overlap
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Collision)
-	USphereComponent* CollisionSphere;
+	USphereComponent* SphereComponent;
 	//NPC message
 	UPROPERTY(EditAnyWhere, BlueprintReadWrite, CAtegory = NPCMessage)
 	FString NpcMessage;

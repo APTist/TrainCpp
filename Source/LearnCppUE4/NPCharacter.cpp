@@ -8,6 +8,12 @@ ANPCharacter::ANPCharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	
+	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("RootComponent"));
+	RootComponent = SphereComponent;
+	SphereComponent->InitSphereRadius(200.0f);
+	SphereComponent->SetCollisionProfileName(TEXT("Pawn"));
+	
 
 }
 

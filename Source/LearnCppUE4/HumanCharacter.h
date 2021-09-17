@@ -14,6 +14,8 @@ class LEARNCPPUE4_API AHumanCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AHumanCharacter();
+	//Set mouse speed;
+	UPROPERTY(BlueprintReadWrite, EditAnyWhere, Category = Pawn)
 	float mouseSensitive;
 
 protected:
