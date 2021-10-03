@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "Components/SphereComponent.h"
+#include "Components/CapsuleComponent.h"
 #include "NPCharacter.generated.h"
 
 UCLASS()
@@ -15,23 +15,40 @@ class LEARNCPPUE4_API ANPCharacter : public ACharacter
 public:
 	// Sets default values for this character's properties
 	ANPCharacter();
-	//Set box component for overlap
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Collision)
-	USphereComponent* SphereComponent;
-	//NPC message
-	UPROPERTY(EditAnyWhere, BlueprintReadWrite, CAtegory = NPCMessage)
-	FString NpcMessage;
 	
+	//NPC message
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category= NPCMessage)
+	FString NpcMessage;
 
-protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	//overlap capsule
+	UPROPERTY(VisibleAnywhere, Category= "Trigger capsule")
+	class UCapsuleComponent* TriggerCapsule;
 
-public:	
+	//start overlap
+	UFUNCTION()
+	void OnOverlapBegin(class UPrimitiveComponent* OverlappedComp,
+						class AActor* OtherActor,
+						class UPrimitiveComponent* OtherComp,
+						int32 OtherBodyIndex,
+						bool bFromSweep,
+						const FHitResult& SweepResult);
+
+	//end overlap
+	UFUNCTION()
+	void OnEndOverlap(class UPrimitiveComponent* OverlappedComp,
+						class AActor* OtherActor,
+						class UPrimitiveComponent* OtherComp,
+						int32 OtherBodyIndex);
+	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
+
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
 };
